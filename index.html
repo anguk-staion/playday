@@ -1,0 +1,109 @@
+<style>
+  /* 1. 이미지 비율 및 크기 조절 섹션 */
+  .card-news-wrapper {
+    max-width: 600px; /* [크기조절] 전체 가로 너비 */
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    background-color: #fff;
+    
+    /* [비율조절] 
+       aspect-ratio를 사용하면 이미지 크기에 상관없이 비율을 고정할 수 있습니다.
+       예: 1 / 1 (정사각형), 4 / 5 (인스타 세로형), 16 / 9 (와이드) 
+    */
+    aspect-ratio: 9 / 16; 
+  }
+  /* 라디오 버튼 숨김 */
+  .card-news-wrapper input[type="radio"] {
+    display: none;
+  }
+  /* 슬라이드 컨테이너 */
+  .slides {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.4s ease-in-out;
+  }
+  .slide {
+    min-width: 100%;
+    height: 100%;
+  }
+  .slide img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    /* [이미지 채우기 방식] 
+       cover: 비율 유지하며 꽉 채움 (여백 없음, 잘릴 수 있음)
+       contain: 비율 유지하며 전체 다 보여줌 (여백 발생 가능)
+    */
+    object-fit: cover; 
+  }
+  /* 좌우 화살표 디자인 (동그라미) */
+  .nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+    font-size: 20px;
+    width: 44px;
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+    border-radius: 50%;
+    cursor: pointer;
+    user-select: none;
+    display: none;
+    z-index: 10;
+    transition: background-color 0.2s;
+  }
+  .nav-arrow:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  .prev { left: 15px; }
+  .next { right: 15px; }
+  /* 이동 로직 */
+  #slide1:checked ~ .slides { transform: translateX(0%); }
+  #slide2:checked ~ .slides { transform: translateX(-100%); }
+  #slide3:checked ~ .slides { transform: translateX(-200%); }
+  #slide4:checked ~ .slides { transform: translateX(-300%); }
+  #slide5:checked ~ .slides { transform: translateX(-400%); }
+  #slide6:checked ~ .slides { transform: translateX(-500%); }
+  /* 현재 슬라이드에 맞는 화살표 노출 */
+  #slide1:checked ~ .arrow-1 { display: block; }
+  #slide2:checked ~ .arrow-2 { display: block; }
+  #slide3:checked ~ .arrow-3 { display: block; }
+  #slide4:checked ~ .arrow-4 { display: block; }
+  #slide5:checked ~ .arrow-5 { display: block; }
+  #slide6:checked ~ .arrow-6 { display: block; }
+  /* [참고] 하단 동그라미(dots) 기능은 
+     HTML 구조와 CSS에서 완전히 제거되었습니다. 
+  */
+</style>
+<div class="card-news-wrapper" style="font-family: AstaSans; font-size: 12pt; line-height: 1.5; margin-top: 0px; margin-bottom: 0px;">
+  <input type="radio" name="cn-slider" id="slide1" checked="checked">
+  <input type="radio" name="cn-slider" id="slide2">
+  <input type="radio" name="cn-slider" id="slide3">
+  <input type="radio" name="cn-slider" id="slide4">
+  <input type="radio" name="cn-slider" id="slide5">
+  <input type="radio" name="cn-slider" id="slide6">
+  
+<div class="slides" style="font-family: AstaSans; font-size: 12pt; line-height: 1.5; margin-top: 0px; margin-bottom: 0px;">
+    
+<div class="slide" style="font-family: AstaSans; font-size: 12pt; line-height: 1.5; margin-top: 0px; margin-bottom: 0px;"><img src="https://raw.githubusercontent.com/anguk-staion/playday/main/WP.01_01.jpg"></div>
+<div class="slide" style="font-family: AstaSans; font-size: 12pt; line-height: 1.5; margin-top: 0px; margin-bottom: 0px;"><img src="https://raw.githubusercontent.com/anguk-staion/playday/main/WP.01_02.jpg"></div>
+<div class="slide" style="font-family: AstaSans; font-size: 12pt; line-height: 1.5; margin-top: 0px; margin-bottom: 0px;"><img src="https://raw.githubusercontent.com/anguk-staion/playday/main/WP.01_03.jpg"></div>
+<div class="slide" style="font-family: AstaSans; font-size: 12pt; line-height: 1.5; margin-top: 0px; margin-bottom: 0px;"><img src="https://raw.githubusercontent.com/anguk-staion/playday/main/WP.01_04.jpg"></div>
+<div class="slide" style="font-family: AstaSans; font-size: 12pt; line-height: 1.5; margin-top: 0px; margin-bottom: 0px;"><img src="https://raw.githubusercontent.com/anguk-staion/playday/main/WP.01_05.jpg"></div>
+<div class="slide" style="font-family: AstaSans; font-size: 12pt; line-height: 1.5; margin-top: 0px; margin-bottom: 0px;"><img src="https://raw.githubusercontent.com/anguk-staion/playday/main/WP.01_06.jpg"></div></div><label for="slide6" class="nav-arrow prev arrow-1">❮</label>
+  <label for="slide2" class="nav-arrow next arrow-1">❯</label>
+  <label for="slide1" class="nav-arrow prev arrow-2">❮</label>
+  <label for="slide3" class="nav-arrow next arrow-2">❯</label>
+  <label for="slide2" class="nav-arrow prev arrow-3">❮</label>
+  <label for="slide4" class="nav-arrow next arrow-3">❯</label>
+  <label for="slide3" class="nav-arrow prev arrow-4">❮</label>
+  <label for="slide5" class="nav-arrow next arrow-4">❯</label>
+  <label for="slide4" class="nav-arrow prev arrow-5">❮</label>
+  <label for="slide6" class="nav-arrow next arrow-5">❯</label>
+  <label for="slide5" class="nav-arrow prev arrow-6">❮</label>
+  <label for="slide1" class="nav-arrow next arrow-6">❯</label></div>
