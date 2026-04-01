@@ -1,138 +1,133 @@
+<div class="card-news-container">
+  <div class="image-wrapper">
+    <img id="card-image" src="https://github.com/anguk-staion/playday/raw/main/WP.01_00.jpg" alt="카드뉴스 이미지">
+  </div>
+  
+  <button id="prev-btn" class="nav-btn left-btn" onclick="prevImage()">&#10094;</button>
+  <button id="next-btn" class="nav-btn right-btn" onclick="nextImage()">&#10095;</button>
+</div>
+
 <style>
-  /* 1. 이미지 비율 및 크기 조절 섹션 */
-  .card-news-container {
-    max-width: 800px; /* [크기조절] 전체 가로 너비 */
-    margin: 0 auto;
-    position: relative;
-    overflow: hidden;
-    background-color: #f4f4f4;
+  :root {
+    /* 💡 여기서 전체 너비를 조절할 수 있습니다 */
+    --card-max-width: 800px;      /* 카드뉴스 전체의 최대 가로 너비 (예: 600px, 800px, 100%) */
     
-    /* [비율조절] 
-       aspect-ratio를 수정하여 전체 비율을 고정하세요.
-       예: 1 / 1 (정사각형), 16 / 9 (가로형), 4 / 5 (세로형) 
-    */
-    aspect-ratio: 1 / 1; 
+    /* 💡 여기서 이미지 컨테이너의 비율을 조절할 수 있습니다. 
+       원본 이미지가 이 비율과 다를 경우, 이미지는 원본 비율을 유지하며 
+       컨테이너 내부에 맞춰지고 여백은 배경색으로 채워집니다. */
+    --card-aspect-ratio: 1 / 1;   /* 가로/세로 비율 (예: 1/1 (정방형), 4/3, 16/9, 원본 이미지 비율과 비슷하게 설정 권장) */
   }
 
-  .slider-track {
+  .card-news-container {
+    position: relative;
+    width: 100%;
+    max-width: var(--card-max-width);
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 8px; /* 테두리 둥글게 */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* 부드러운 그림자 효과 */
+    background-color: #ffffff; /* 컨테이너 배경색 (여백 색상) */
+  }
+
+  .image-wrapper {
+    width: 100%;
+    aspect-ratio: var(--card-aspect-ratio);
     display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f7f7f7; /* 이미지 로딩 전/여백 배경색 */
+  }
+
+  #card-image {
     width: 100%;
     height: 100%;
-    /* 초기 위치는 첫 번째 장(이미지 0번) */
-    transform: translateX(-100%); 
+    /* ⭐️ 핵심: 원본 이미지 비율을 유지하면서 컨테이너 내부에 꽉 차게 맞춤. 남는 공간은 배경색으로 채워짐. */
+    object-fit: contain; 
+    transition: opacity 0.3s ease-in-out; /* 부드러운 이미지 전환 효과 */
   }
 
-  .slide {
-    min-width: 100%;
-    height: 100%;
-  }
-
-  .slide img {
-    width: 100%;
-    height: 100%;
-    display: block;
-    /* [이미지 채우기 방식] cover: 꽉 채움 / contain: 전체 노출 */
-    object-fit: cover; 
-  }
-
-  /* 좌우 화살표 디자인 (동그라미) */
   .nav-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     background-color: rgba(0, 0, 0, 0.4);
     color: white;
-    font-size: 20px;
-    width: 44px;
-    height: 44px;
     border: none;
-    border-radius: 50%;
+    width: 44px; /* 버튼 크기 확대 */
+    height: 44px;
     cursor: pointer;
-    z-index: 10;
+    font-size: 20px;
+    border-radius: 50%;
+    transition: background-color 0.2s ease, opacity 0.2s ease;
     display: flex;
-    align-items: center;
     justify-content: center;
-    transition: background-color 0.2s;
+    align-items: center;
+    z-index: 10; /* 버튼이 이미지 위에 오도록 설정 */
+    opacity: 0.8;
   }
 
   .nav-btn:hover {
     background-color: rgba(0, 0, 0, 0.8);
+    opacity: 1;
   }
 
-  .prev-btn { left: 15px; }
-  .next-btn { right: 15px; }
+  .left-btn { left: 20px; }
+  .right-btn { right: 20px; }
+
+  /* 첫 페이지에서 이전 버튼 숨기기용 클래스 */
+  .hidden { display: none !important; }
 </style>
 
-<div class="card-news-container">
-  <div class="slider-track" id="sliderTrack">
-    <div class="slide"><img src="https://raw.githubusercontent.com/anguk-staion/playday/main/WP.01_06.jpg"></div>
-    
-    <div class="slide"><img src="https://raw.githubusercontent.com/anguk-staion/playday/main/WP.01_00.jpg"></div>
-    <div class="slide"><img src="https://raw.githubusercontent.com/anguk-staion/playday/main/WP.01_01.jpg"></div>
-    <div class="slide"><img src="https://raw.githubusercontent.com/anguk-staion/playday/main/WP.01_02.jpg"></div>
-    <div class="slide"><img src="https://raw.githubusercontent.com/anguk-staion/playday/main/WP.01_03.jpg"></div>
-    <div class="slide"><img src="https://raw.githubusercontent.com/anguk-staion/playday/main/WP.01_04.jpg"></div>
-    <div class="slide"><img src="https://raw.githubusercontent.com/anguk-staion/playday/main/WP.01_05.jpg"></div>
-    <div class="slide"><img src="https://raw.githubusercontent.com/anguk-staion/playday/main/WP.01_06.jpg"></div>
-
-    <div class="slide"><img src="https://raw.githubusercontent.com/anguk-staion/playday/main/WP.01_00.jpg"></div>
-  </div>
-
-  <button class="nav-btn prev-btn" id="prevBtn">&#10094;</button>
-  <button class="nav-btn next-btn" id="nextBtn">&#10095;</button>
-</div>
-
 <script>
-  const track = document.getElementById('sliderTrack');
-  const slides = document.querySelectorAll('.slide');
-  const prevBtn = document.getElementById('prevBtn');
-  const nextBtn = document.getElementById('nextBtn');
+  // GitHub raw 이미지 링크 배열
+  const images = [
+    "https://github.com/anguk-staion/playday/raw/main/WP.01_00.jpg",
+    "https://github.com/anguk-staion/playday/raw/main/WP.01_01.jpg",
+    "https://github.com/anguk-staion/playday/raw/main/WP.01_02.jpg",
+    "https://github.com/anguk-staion/playday/raw/main/WP.01_03.jpg",
+    "https://github.com/anguk-staion/playday/raw/main/WP.01_04.jpg",
+    "https://github.com/anguk-staion/playday/raw/main/WP.01_05.jpg",
+    "https://github.com/anguk-staion/playday/raw/main/WP.01_06.jpg"
+  ];
 
-  let index = 1; // 0번 이미지(첫 장)가 처음에 보이도록 설정
-  let isMoving = false;
+  let currentIndex = 0;
+  const imgElement = document.getElementById("card-image");
+  const prevBtn = document.getElementById("prev-btn");
 
-  // 화살표 표시/숨김을 제어하는 함수
-  function updateButtons() {
-    // 현재 위치가 첫 장(index 1)이거나, 마지막 장에서 넘어간 가짜 첫 장(마지막 index)일 때
-    if (index === 1 || index === slides.length - 1) {
-      prevBtn.style.display = 'none'; // 왼쪽 화살표 숨김
-    } else {
-      prevBtn.style.display = 'flex'; // 왼쪽 화살표 표시
-    }
-  }
-
-  // 초기 상태에서 버튼 한 번 업데이트
-  updateButtons();
-
-  function moveSlider() {
-    track.style.transition = 'transform 0.4s ease-in-out';
-    track.style.transform = `translateX(-${index * 100}%)`;
-    updateButtons(); // 슬라이드가 넘어갈 때마다 화살표 상태 즉시 업데이트
-  }
-
-  // 슬라이드 애니메이션이 끝났을 때의 처리 (무한 루프)
-  track.addEventListener('transitionend', () => {
-    isMoving = false;
+  function updateView() {
+    imgElement.style.opacity = 0; // 이미지 전환 전 투명하게
     
-    // 가짜 0번(가장 오른쪽)에 도달하면 애니메이션 없이 진짜 0번 위치로 몰래 점프
-    if (slides[index].innerHTML.includes('WP.01_00.jpg') && index === slides.length - 1) {
-      track.style.transition = 'none';
-      index = 1;
-      track.style.transform = `translateX(-${index * 100}%)`;
+    // 이미지 소스 업데이트 후, 로드가 완료되면 다시 보이게 함 (부드러운 전환)
+    imgElement.onload = function() {
+      imgElement.style.opacity = 1;
+    };
+    imgElement.src = images[currentIndex];
+    
+    // 조건 1: 첫번째 장(index 0)에서는 왼쪽 버튼 숨김
+    if (currentIndex === 0) {
+      prevBtn.classList.add("hidden");
+    } else {
+      prevBtn.classList.remove("hidden");
     }
-  });
+  }
 
-  nextBtn.addEventListener('click', () => {
-    if (isMoving) return;
-    isMoving = true;
-    index++;
-    moveSlider();
-  });
+  function nextImage() {
+    if (currentIndex === images.length - 1) {
+      // 조건 2: 마지막 장에서 오른쪽 누르면 처음(0)으로 무한루프
+      currentIndex = 0;
+    } else {
+      currentIndex++;
+    }
+    updateView();
+  }
 
-  prevBtn.addEventListener('click', () => {
-    if (isMoving) return;
-    isMoving = true;
-    index--;
-    moveSlider();
-  });
+  function prevImage() {
+    if (currentIndex > 0) {
+      currentIndex--;
+      updateView();
+    }
+  }
+
+  // 로드 시 초기 화면 렌더링
+  updateView();
 </script>
