@@ -44,7 +44,8 @@
     .carousel__track {
       display: flex;
       align-items: flex-start;
-      transition: transform 0.55s ease;
+      /* 애니메이션 속도 및 곡선(cubic-bezier)을 변경하여 훨씬 부드럽고 쫀득한 느낌 부여 */
+      transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
       will-change: transform;
     }
 
@@ -102,9 +103,6 @@
       pointer-events: auto;
       display: grid;
       place-items: center;
-      font-size: 28px;
-      font-weight: 500;
-      line-height: 1;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
       backdrop-filter: blur(6px);
       transition: background 0.2s ease, transform 0.2s ease;
@@ -169,7 +167,6 @@
       .nav-btn {
         width: 46px;
         height: 46px;
-        font-size: 24px;
       }
 
       .page-badge {
@@ -182,7 +179,6 @@
 </head>
 <body>
   <section class="card-news">
-    <!-- 실제 슬라이드 1~7 -->
     <input type="radio" name="slider" id="slide-1" checked>
     <input type="radio" name="slider" id="slide-2">
     <input type="radio" name="slider" id="slide-3">
@@ -191,82 +187,99 @@
     <input type="radio" name="slider" id="slide-6">
     <input type="radio" name="slider" id="slide-7">
 
-    <!-- 마지막 → 처음 자연스러운 루프용 복제 슬라이드 -->
     <input type="radio" name="slider" id="slide-8">
 
     <div class="carousel">
       <div class="carousel__viewport">
         <div class="carousel__track" id="carouselTrack">
-          <!-- 1 -->
           <article class="slide">
             <span class="page-badge">1 / 7</span>
             <img src="https://raw.githubusercontent.com/anguk-staion/playday/main/WP.01_00.jpg" alt="카드뉴스 1" />
             <div class="nav">
-              <label for="slide-2" class="nav-btn next" aria-label="다음 슬라이드">›</label>
+              <label for="slide-2" class="nav-btn next" aria-label="다음 슬라이드">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+              </label>
             </div>
           </article>
 
-          <!-- 2 -->
           <article class="slide">
             <span class="page-badge">2 / 7</span>
             <img src="https://raw.githubusercontent.com/anguk-staion/playday/main/WP.01_01.jpg" alt="카드뉴스 2" />
             <div class="nav">
-              <label for="slide-1" class="nav-btn prev" aria-label="이전 슬라이드">‹</label>
-              <label for="slide-3" class="nav-btn next" aria-label="다음 슬라이드">›</label>
+              <label for="slide-1" class="nav-btn prev" aria-label="이전 슬라이드">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+              </label>
+              <label for="slide-3" class="nav-btn next" aria-label="다음 슬라이드">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+              </label>
             </div>
           </article>
 
-          <!-- 3 -->
           <article class="slide">
             <span class="page-badge">3 / 7</span>
             <img src="https://raw.githubusercontent.com/anguk-staion/playday/main/WP.01_02.jpg" alt="카드뉴스 3" />
             <div class="nav">
-              <label for="slide-2" class="nav-btn prev" aria-label="이전 슬라이드">‹</label>
-              <label for="slide-4" class="nav-btn next" aria-label="다음 슬라이드">›</label>
+              <label for="slide-2" class="nav-btn prev" aria-label="이전 슬라이드">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+              </label>
+              <label for="slide-4" class="nav-btn next" aria-label="다음 슬라이드">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+              </label>
             </div>
           </article>
 
-          <!-- 4 -->
           <article class="slide">
             <span class="page-badge">4 / 7</span>
             <img src="https://raw.githubusercontent.com/anguk-staion/playday/main/WP.01_03.jpg" alt="카드뉴스 4" />
             <div class="nav">
-              <label for="slide-3" class="nav-btn prev" aria-label="이전 슬라이드">‹</label>
-              <label for="slide-5" class="nav-btn next" aria-label="다음 슬라이드">›</label>
+              <label for="slide-3" class="nav-btn prev" aria-label="이전 슬라이드">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+              </label>
+              <label for="slide-5" class="nav-btn next" aria-label="다음 슬라이드">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+              </label>
             </div>
           </article>
 
-          <!-- 5 -->
           <article class="slide">
             <span class="page-badge">5 / 7</span>
             <img src="https://raw.githubusercontent.com/anguk-staion/playday/main/WP.01_04.jpg" alt="카드뉴스 5" />
             <div class="nav">
-              <label for="slide-4" class="nav-btn prev" aria-label="이전 슬라이드">‹</label>
-              <label for="slide-6" class="nav-btn next" aria-label="다음 슬라이드">›</label>
+              <label for="slide-4" class="nav-btn prev" aria-label="이전 슬라이드">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+              </label>
+              <label for="slide-6" class="nav-btn next" aria-label="다음 슬라이드">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+              </label>
             </div>
           </article>
 
-          <!-- 6 -->
           <article class="slide">
             <span class="page-badge">6 / 7</span>
             <img src="https://raw.githubusercontent.com/anguk-staion/playday/main/WP.01_05.jpg" alt="카드뉴스 6" />
             <div class="nav">
-              <label for="slide-5" class="nav-btn prev" aria-label="이전 슬라이드">‹</label>
-              <label for="slide-7" class="nav-btn next" aria-label="다음 슬라이드">›</label>
+              <label for="slide-5" class="nav-btn prev" aria-label="이전 슬라이드">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+              </label>
+              <label for="slide-7" class="nav-btn next" aria-label="다음 슬라이드">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+              </label>
             </div>
           </article>
 
-          <!-- 7 -->
           <article class="slide">
             <span class="page-badge">7 / 7</span>
             <img src="https://raw.githubusercontent.com/anguk-staion/playday/main/WP.01_06.jpg" alt="카드뉴스 7" />
             <div class="nav">
-              <label for="slide-6" class="nav-btn prev" aria-label="이전 슬라이드">‹</label>
-              <button type="button" class="nav-btn next" aria-label="처음으로 돌아가기" onclick="loopToStart()">›</button>
+              <label for="slide-6" class="nav-btn prev" aria-label="이전 슬라이드">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+              </label>
+              <button type="button" class="nav-btn next" aria-label="처음으로 돌아가기" onclick="loopToStart()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+              </button>
             </div>
           </article>
 
-          <!-- 8 : 첫 장 복제본 (루프 애니메이션 전용) -->
           <article class="slide" aria-hidden="true">
             <span class="page-badge">1 / 7</span>
             <img src="https://raw.githubusercontent.com/anguk-staion/playday/main/WP.01_00.jpg" alt="" />
@@ -292,15 +305,23 @@
     const cloneSlide = document.getElementById("slide-8");
 
     function loopToStart() {
-      const resetToFirst = () => {
+      // 1. 복제된 첫 장(8번째 위치)으로 이동하는 애니메이션 시작
+      cloneSlide.checked = true;
+
+      // 2. 애니메이션이 종료된 직후에 몰래 진짜 첫 장으로 위치를 교체
+      const resetToFirst = (e) => {
+        // transform 애니메이션이 끝났을 때만 실행되도록 방어 코드 추가
+        if (e.propertyName !== 'transform') return;
+
         track.classList.add("no-transition");
         firstSlide.checked = true;
-        void track.offsetWidth;
+        void track.offsetWidth; // 브라우저에 변경 사항 강제 적용 (Reflow)
         track.classList.remove("no-transition");
+        
+        track.removeEventListener("transitionend", resetToFirst);
       };
 
-      track.addEventListener("transitionend", resetToFirst, { once: true });
-      cloneSlide.checked = true;
+      track.addEventListener("transitionend", resetToFirst);
     }
   </script>
 </body>
