@@ -17,9 +17,11 @@
       color: #111827;
     }
 
+    /* 💡 크기 강제 적용 영역 */
     .card-news {
-      max-width: 650px;
-      margin: 0 auto;
+      width: 100% !important;
+      max-width: 800px !important; /* ⬅️ 이 숫자를 조절하여 원하는 크기로 맞추세요 */
+      margin: 0 auto !important;
       position: relative;
     }
 
@@ -236,7 +238,7 @@
         prevBtn.style.display = 'grid'; 
       }
 
-      // 하단 Dot 활성화 디자인 변경 (마지막 복제본에 도달했을 땐 1번째 Dot에 불이 들어오게 처리)
+      // 하단 Dot 활성화 디자인 변경
       const activeIndex = currentIndex === totalOriginalSlides ? 0 : currentIndex;
       dots.forEach((dot, index) => {
         if (index === activeIndex) {
@@ -254,14 +256,14 @@
       currentIndex++;
       updateSlider();
       
-      // 마지막 장(7번)에서 오른쪽으로 넘겨 복제본(가짜 1번)에 도달했을 때 무한 루프 트릭 실행
+      // 마지막 장에서 오른쪽으로 넘겨 복제본에 도달했을 때 무한 루프 트릭 실행
       if (currentIndex === totalOriginalSlides) {
         setTimeout(() => {
-          // 화면 전환 애니메이션(0.4초)이 끝난 직후 전환 효과를 끄고 진짜 1번 자리로 몰래 순간이동
+          // 화면 전환 애니메이션(0.4초)이 끝난 직후 전환 효과를 끄고 진짜 1번 자리로 몰래 이동
           track.style.transition = 'none'; 
           currentIndex = 0;
           track.style.transform = `translateX(0)`;
-          prevBtn.style.display = 'none'; // 다시 첫 장이므로 왼쪽 버튼 숨김
+          prevBtn.style.display = 'none'; // 첫 장이므로 왼쪽 버튼 다시 숨김
         }, 400); 
       }
     });
@@ -273,7 +275,7 @@
       updateSlider();
     });
 
-    // 하단의 점(Dot)을 클릭해서 슬라이드를 이동할 수 있도록 기능 추가
+    // 하단의 점(Dot)을 클릭해서 슬라이드를 이동
     dots.forEach((dot, index) => {
       dot.addEventListener('click', () => {
         // 루프 복귀 애니메이션 도중에는 오작동 방지를 위해 클릭 무시
